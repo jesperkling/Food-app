@@ -4,6 +4,7 @@ import HomePage from './pages/HomePage'
 import CreatePlacePage from './pages/CreatePlacePage'
 import NotFound from './pages/NotFound'
 import './assets/scss/App.scss'
+import LoginPage from './pages/LoginPage'
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
 				<Route path="/" element={<HomePage />} />
 				<Route path="*" element={<NotFound />} />
         <Route path="/create-place" element={<CreatePlacePage />} />
+        <Route path='/login' element={<LoginPage />} />
 			</Routes>
     </div>
   )
