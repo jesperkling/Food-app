@@ -1,12 +1,36 @@
-import React from 'react'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Container, Form, Button } from 'react-bootstrap'
+import { collection, addDoc } from 'firebase/firestore'
+import { db } from '../firebase'
 
 function CreatePlacePage() {
-    const {handleSubmit, register, formState: { errors }} = useForm()
+    const [pending, setPending] = useState(false)
+    const {handleSubmit, register, formState: { errors }, reset} = useForm()
 
-    const onAddPlace = (place) => {
+    const onAddPlace =  async place => {
         console.log(place)
+
+        setPending(true)
+
+        await addDoc(collection(db, 'restaurants'), {
+            name: place.name,
+            adress: place.adress,
+            location: place.location,
+            description: place.description,
+            cuisine: place.cuisine,
+            type: place.type,
+            offers: place.offers
+        })
+
+        reset()
+
+        reset({
+            type: '',
+            offers: ''
+        })
+
+        setPending(false)
     }
 
   return (
@@ -117,7 +141,9 @@ function CreatePlacePage() {
                 <Form.Control {...register('instagram')} type='text' />
             </Form.Group>
 
-            <Button type='submit'>Add</Button>
+            <Button disabled={pending} type='submit'>
+                {pending ? '...adding' : 'Add'}
+            </Button>
         </Form>
     </Container>
   )
