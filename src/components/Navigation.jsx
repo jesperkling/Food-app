@@ -23,6 +23,7 @@ const Navigation = () => {
 						) : (
 							<>
 								<Nav.Link as={NavLink} end to="/login">Login</Nav.Link>
+								<Nav.Link as={NavLink} end to='/create-tips'>Tips us</Nav.Link>
 							</>
 						)}
 						
