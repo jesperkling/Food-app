@@ -6,7 +6,8 @@ import NotFound from './pages/NotFound'
 import './assets/scss/App.scss'
 import LoginPage from './pages/LoginPage'
 import LogoutPage from './pages/LogoutPage'
-import CreateTipsPage from './pages/CreateTipsPAge'
+import CreateTipsPage from './pages/CreateTipsPage'
+import TipsPage from './pages/TipsPage'
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
 				<Route path="*" element={<NotFound />} />
         <Route path="/create-place" element={<CreatePlacePage />} />
         <Route path="/create-tips" element={<CreateTipsPage />} />
+        <Route path='/tips' element={<TipsPage />} />
         <Route path='/login' element={<LoginPage />} />
         <Route path='/logout' element={<LogoutPage />} />
 			</Routes>

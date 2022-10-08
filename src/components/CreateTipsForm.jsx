@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { collection, addDoc } from 'firebase/firestore'
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore'
 import { db } from '../firebase'
 import { Container, Form, Button } from 'react-bootstrap'
 
@@ -10,7 +10,8 @@ const CreateTipsForm = () => {
 
     const onNewTip = async (data) => {
         await addDoc(collection(db, 'tips'), {
-            message: data.message
+            message: data.message,
+            created: serverTimestamp(),
         })
         reset()
         setPending(false)

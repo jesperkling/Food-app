@@ -18,6 +18,7 @@ const Navigation = () => {
 						{currentUser ? (
 							<>
 								<Nav.Link as={NavLink} end to="/create-place">Add Place</Nav.Link>
+								<Nav.Link as={NavLink} end to='/tips'>Tips</Nav.Link>
 								<Nav.Link as={NavLink} end to="/logout">Logout</Nav.Link>
 							</>
 						) : (
