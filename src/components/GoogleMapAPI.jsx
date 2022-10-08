@@ -14,12 +14,12 @@ const GoogleMapAPI = () => {
         return (
             isLoaded && (
                 <GoogleMap
-                zoom={12}
-                center={{
-                    lat: latitude,
-                    lng: longitude
-                }}
-                mapContainerClassName='map-container'
+                    zoom={12}
+                    center={{
+                        lat: latitude,
+                        lng: longitude
+                    }}
+                    mapContainerClassName='map-container'
                 ></GoogleMap>
             )
             
