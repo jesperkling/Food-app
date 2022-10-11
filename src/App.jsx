@@ -8,6 +8,7 @@ import LoginPage from './pages/LoginPage'
 import LogoutPage from './pages/LogoutPage'
 import CreateTipsPage from './pages/CreateTipsPage'
 import TipsPage from './pages/TipsPage'
+import UpdatePlacePage from './pages/UpdatePlacePage'
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
 				<Route path="/" element={<HomePage />} />
 				<Route path="*" element={<NotFound />} />
         <Route path="/create-place" element={<CreatePlacePage />} />
+        <Route path="/update-place" element={<UpdatePlacePage />} />
         <Route path="/create-tips" element={<CreateTipsPage />} />
         <Route path='/tips' element={<TipsPage />} />
         <Route path='/login' element={<LoginPage />} />

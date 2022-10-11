@@ -1,17 +1,20 @@
-import { useState } from 'react'
+import { doc, updateDoc } from 'firebase/firestore'
 import { useForm } from 'react-hook-form'
+import { db } from '../firebase'
 import { Container, Form, Button } from 'react-bootstrap'
+import React, { useState } from 'react'
+import useStreamDocument from '../hooks/useStreamDocument'
 
-const CreatePlaceForm = ({ addOrUpdate, col, db }) => {
-    const [pending, setPending] = useState(false)
-    const {handleSubmit, register, formState: { errors }, reset} = useForm()
+const UpdatePlaceForm = ({ thisPlace }) => {
+    const {handleSubmit, register, formState: { errors }} = useForm()
+    const [loading, setLoading] = useState(false)
 
-    const onAddPlace =  async place => {
+    const onUpdatePlace = async place => {
         console.log(place)
 
-        setPending(true)
+        setLoading(true)
 
-        await addOrUpdate(col(db, 'restaurants'), {
+        await updateDoc(doc(db, 'restaurants', thisPlace.id), {
             name: place.name,
             adress: place.adress,
             location: place.location,
@@ -20,27 +23,21 @@ const CreatePlaceForm = ({ addOrUpdate, col, db }) => {
             type: place.type,
             offers: place.offers
         })
-
-        reset()
-
-        reset({
-            type: '',
-            offers: ''
-        })
-
-        setPending(false)
+        setLoading(false)
     }
-    
-    return(
+
+    return (
         <Container>
-            <h1>Add place to list</h1>
-            <Form noValidate onSubmit={handleSubmit(onAddPlace)}>
+            <h1>Update place</h1>
+            <Form noValidate onSubmit={handleSubmit(onUpdatePlace)}>
                 <Form.Group className='mb-3' controlId='name'>
                     <Form.Label>Name</Form.Label>
                     <Form.Control {...register('name', {
                         required: 'Name is required',
                         minLength: 2,
-                    })} type='text' />
+                    })} 
+                    type='text'
+                    defaultValue={thisPlace.name} />
                     {errors.name && <span>{errors.name.message}</span>}
                 </Form.Group>
 
@@ -52,7 +49,9 @@ const CreatePlaceForm = ({ addOrUpdate, col, db }) => {
                             value: 2,
                             message: 'Adress too short'
                         }
-                    })} type='text' />
+                    })} 
+                    type='text'
+                    defaultValue={thisPlace.adress} />
                     {errors.adress && <span>{errors.adress.message}</span>}
                 </Form.Group>
 
@@ -64,7 +63,9 @@ const CreatePlaceForm = ({ addOrUpdate, col, db }) => {
                             value: 2,
                             message: 'Location too short'
                         }
-                    })} type='text' />
+                    })} 
+                    type='text'
+                    defaultValue={thisPlace.location} />
                     {errors.location && <span>{errors.location.message}</span>}
                 </Form.Group>
 
@@ -76,7 +77,9 @@ const CreatePlaceForm = ({ addOrUpdate, col, db }) => {
                             value: 4,
                             message: 'Description is too short'
                         }
-                    })} type='text' />
+                    })} 
+                    type='text'
+                    defaultValue={thisPlace.description} />
                     {errors.description && <span>{errors.description.message}</span>}
                 </Form.Group>
 
@@ -85,7 +88,9 @@ const CreatePlaceForm = ({ addOrUpdate, col, db }) => {
                     <Form.Control {...register('cuisine', {
                         required: 'Cuisine is required',
                         minLength: 4,                        
-                    })} type='text' />
+                    })} 
+                    type='text'
+                    defaultValue={thisPlace.cuisine} />
                     {errors.cuisine && <span>{errors.cuisine.message}</span>}
                 </Form.Group>
 
@@ -114,37 +119,12 @@ const CreatePlaceForm = ({ addOrUpdate, col, db }) => {
                     </select>
                 </Form.Group>
 
-                <Form.Group className='mb-3' controlId='email'>
-                    <Form.Label>Email</Form.Label>
-                    <Form.Control {...register('email')} type='email' />
-                </Form.Group>
-
-                <Form.Group className='mb-3' controlId='phone'>
-                    <Form.Label>Phone number</Form.Label>
-                    <Form.Control {...register('phone')} type='phone' />
-                </Form.Group>
-
-                <Form.Group className='mb-3' controlId='homepage'>
-                    <Form.Label>Homepage</Form.Label>
-                    <Form.Control {...register('homepage')} type='text' />
-                </Form.Group>
-
-                <Form.Group className='mb-3' controlId='facebook'>
-                    <Form.Label>Facebook</Form.Label>
-                    <Form.Control {...register('facebook')} type='text' />
-                </Form.Group>
-
-                <Form.Group className='mb-3' controlId='instagram'>
-                    <Form.Label>Instagram</Form.Label>
-                    <Form.Control {...register('instagram')} type='text' />
-                </Form.Group>
-
-                <Button disabled={pending} type='submit'>
-                    {pending ? '...adding' : 'Add'}
+                <Button disabled={loading} type='submit'>
+                    {loading ? '...updating' : 'Update'}
                 </Button>
             </Form>
         </Container>
     )
 }
 
-export default CreatePlaceForm
+export default UpdatePlaceForm
