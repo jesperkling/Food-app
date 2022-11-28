@@ -55,8 +55,8 @@ const GoogleMapAPI = () => {
                     >
                     </GooglePlacesAutocomplete>
                 </div>
-        </>  
-    )
+            </>  
+        )
     }
 }
 
