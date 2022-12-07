@@ -16,7 +16,7 @@ const HomePage = () => {
         libraries
 	})
 
-	const [position, setPosition] = useState({ lat: 55, lng: 13 })
+	const [position, setPosition] = useState({ lat: 55.5833, lng: 13.0333 })
 
 	const handleSubmit = async (address) => {
 		if(!address) {
