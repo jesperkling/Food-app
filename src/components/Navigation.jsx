@@ -15,22 +15,14 @@ const Navigation = () => {
 				<Navbar.Toggle aria-controls="responsive-navbar-nav" />
 				<Navbar.Collapse id="responsive-navbar-nav">
 					<Nav className="ms-auto">
-						{currentUser ? (
-							<>	
-								
-								<Nav.Link as={NavLink} end to="/create-place">Add Place</Nav.Link>
-								<Nav.Link as={NavLink} end to="/update-place">Update Place</Nav.Link>
-								<Nav.Link as={NavLink} end to='/tips'>Tips</Nav.Link>
-								<Nav.Link as={NavLink} end to="/logout">Logout</Nav.Link>
-							</>
-						) : (
-							<>
-								<Nav.Link as={NavLink} end to="/login">Login</Nav.Link>
-								<Nav.Link as={NavLink} end to='/create-tips'>Tips us</Nav.Link>
-							</>
-						)}
-						
-						
+						<>			
+							<Nav.Link as={NavLink} end to="/create-place">Add Place</Nav.Link>
+							<Nav.Link as={NavLink} end to="/update-place">Update Place</Nav.Link>
+							<Nav.Link as={NavLink} end to='/tips'>Tips</Nav.Link>
+							<Nav.Link as={NavLink} end to="/logout">Logout</Nav.Link>
+							<Nav.Link as={NavLink} end to="/login">Login</Nav.Link>
+							<Nav.Link as={NavLink} end to='/create-tips'>Tips us</Nav.Link>
+						</>
 					</Nav>
 				</Navbar.Collapse>
 			</Container>
