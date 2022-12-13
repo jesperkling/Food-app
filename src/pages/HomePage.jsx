@@ -1,4 +1,3 @@
-import '../assets/scss/map.scss'
 import Map from '../components/Map'
 
 const HomePage = () => {

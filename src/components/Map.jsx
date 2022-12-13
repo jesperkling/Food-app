@@ -1,6 +1,7 @@
 import GoogleMapAPI from '../services/GoogleMapAPI'
 import { GoogleMap, useJsApiLoader, Marker } from "@react-google-maps/api"
 import { useState } from "react"
+import '../assets/scss/map.scss'
 
 const libraries = ['places']
 
