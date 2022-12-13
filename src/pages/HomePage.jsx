@@ -1,5 +1,5 @@
 import GoogleMapAPI from '../services/GoogleMapAPI'
-import { GoogleMap, useJsApiLoader } from "@react-google-maps/api"
+import { GoogleMap, useJsApiLoader, Marker } from "@react-google-maps/api"
 import { useState } from "react"
 import SearchForm from "../components/SearchForm"
 import '../assets/scss/map.scss'
@@ -35,13 +35,13 @@ const HomePage = () => {
 
 			{isLoaded && (
 				<>
-					<SearchForm onSubmit={handleSubmit} />
-
 					<GoogleMap
 						zoom={12}
 						center={position}
 						mapContainerClassName='map-container'
-					></GoogleMap>
+					>
+						<Marker position={position} /> 
+					</GoogleMap>
 				</>
 			)}
 		</>
